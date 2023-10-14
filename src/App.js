@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+// react-router-dom
+import { Routes, Route } from "react-router-dom";
+import UserTemplate from "./template/HomeTemplate/UserTemplate";
+import Home from "./page/Home/Home";
+import Login from "./page/User/Login/Login";
+import SignUp from "./page/User/SignUp/SignUp";
+import Error from "./page/Error/Error";
+import CreateProject from "./page/Home/CreateProject/CreateProject";
+import BoardProject from "./page/Home/BoardProject/BoardProject";
+import LandingTemplate from "./template/LandingTemplate/LandingTemplate";
+import LandingPage from "./page/LandingPage/LandingPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<LandingTemplate />}>
+          <Route index element={<LandingPage />} />
+        </Route>
+        <Route path="" element={<UserTemplate />}>
+          <Route path="manage-project" element={<Home />}>
+            <Route path="board-project" element={<BoardProject />} />
+            <Route path="create-project" element={<CreateProject />} />
+          </Route>
+        </Route>
+
+        <Route path="sign-in" element={<Login />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="error" element={<Error />} />
+      </Routes>
+    </>
   );
 }
 
