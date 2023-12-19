@@ -1,16 +1,29 @@
+import { CREATE_PROJECT_AUTHORIZE, DELETE_PROJECT_AUTHORIZE, GET_ALL_PROJECT, GET_PROJECT_CATEGORY, UPDATE_PROJECT_AUTHORIZE } from "../util/constant/settingSystem";
 import { https } from "./config";
 
 export const manageProjectServ = {
-  // GET
+  // Get all categories
   getProjectCategory: () => {
-    return https.get("/api/ProjectCategory");
+    return https.get(GET_PROJECT_CATEGORY);
   },
 
-  // POST
-  createProject: (data) => {
-    return https.post("/api/Project/createProject", data);
+  // Get all project
+  getAllProject: () => {
+    return https.get(GET_ALL_PROJECT);
   },
+
+  // Create project
   createProjectAuthorize: (data) => {
-    return https.post("/api/Project/createProjectAuthorize", data);
+    return https.post(CREATE_PROJECT_AUTHORIZE, data);
   },
+
+  // Update project
+  updateProjectAuthorize: (projectUpdate) => {
+    return https.put(UPDATE_PROJECT_AUTHORIZE + projectUpdate.id, projectUpdate);
+  },
+
+  // Delete project
+  deleteProjectAuthorize: (projectDelete) => {
+    return https.delete(DELETE_PROJECT_AUTHORIZE + projectDelete.id, projectDelete);
+  }
 };

@@ -1,12 +1,16 @@
 import Header from "../../components/Header/Header";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import ProjectDrawerEdit from "../../page/Home/Project/ProjectDrawerEdit";
 
 const UserTemplate = () => {
   return (
     <div>
       <Header />
-      <Outlet />
+      <div className="mt-[48px]">
+        <ProjectDrawerEdit />
+        <Outlet />
+      </div>
     </div>
   );
 };

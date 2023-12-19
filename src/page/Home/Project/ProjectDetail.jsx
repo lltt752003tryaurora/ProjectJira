@@ -2,7 +2,7 @@ import React from "react";
 import MainBoard from "../../../components/HomeComponents/MainBoard/MainBoard";
 import InfoModal from "../../../components/HomeComponents/InfoModal/InfoModal";
 
-const BoardProject = () => {
+const ProjectDetail = () => {
   return (
     <div>
       <MainBoard />
@@ -11,4 +11,4 @@ const BoardProject = () => {
   );
 };
 
-export default BoardProject;
+export default ProjectDetail;

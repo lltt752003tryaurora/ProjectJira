@@ -3,7 +3,7 @@ import Background1 from "../../../asset/img/rainBg.jpg";
 import { Editor } from "@tinymce/tinymce-react";
 import { API_KEY_TINY } from "../../../util/constant/settingSystem";
 import { useFormik } from "formik";
-import { message } from "antd";
+import { message, Popconfirm } from "antd";
 import { getProjectCategoryAPI } from "../../../redux/projectSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { manageProjectServ } from "../../../service/manageProject";
@@ -12,6 +12,7 @@ import * as Yup from "yup";
 const CreateProject = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { arrCategories } = useSelector((state) => state.projectSlice);
+  console.log(arrCategories);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -62,6 +63,7 @@ const CreateProject = () => {
     errors,
     handleSubmit,
     setFieldValue,
+    handleReset,
     values,
     touched,
   } = formik;
@@ -73,7 +75,7 @@ const CreateProject = () => {
         style={{ backgroundImage: `url(${Background1})` }}
       >
         <h1 className="font-bold text-2xl text-white pl-5 pt-4">
-          Create Project
+          Create Your Project
         </h1>
         <form className="space-y-3 p-5" onSubmit={handleSubmit}>
           <div className="mb-6">
@@ -142,7 +144,7 @@ const CreateProject = () => {
             >
               <option value="0">Select your project</option>
               {arrCategories?.map((item, index) => {
-                // console.log(item);
+                console.log(item);
                 return (
                   <option value={item.id} key={index}>
                     {item.projectCategoryName}
@@ -197,7 +199,6 @@ const CreateProject = () => {
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               }}
               onEditorChange={(value) => {
-                console.log(value);
                 setFieldValue("description", value);
               }}
               value={values.description}
@@ -210,12 +211,31 @@ const CreateProject = () => {
             ) : null}
           </div>
 
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Create Project
-          </button>
+          <div className="flex gap-3 justify-end">
+            <Popconfirm
+              title="Reset form"
+              description="Are you sure to reset?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={handleReset}
+              okButtonProps={{
+                style: { backgroundColor: "red", color: "white" },
+              }}
+            >
+              <button
+                type="button"
+                className="text-black bg-white hover:bg-slate-500 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-white dark:focus:ring-white-800 duration-300 hover:text-slate-100"
+              >
+                Reset
+              </button>
+            </Popconfirm>
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-700 dark:hover:slate-200 dark:focus:ring-blue-800 duration-300 hover:text-blue-400"
+            >
+              Create Project
+            </button>
+          </div>
         </form>
       </div>
     </>

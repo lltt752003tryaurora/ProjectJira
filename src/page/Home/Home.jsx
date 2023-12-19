@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { Breadcrumb, Layout, Menu, message, theme } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import {
   DesktopOutlined,
-  FileOutlined,
+  ProfileOutlined,
   PieChartOutlined,
   UserOutlined,
+  UsergroupAddOutlined,
+  LineChartOutlined,
   ProjectOutlined,
   UnorderedListOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { saveLocalStore } from "../../util/localStore";
 
 const Home = () => {
-  const [pageNavi, setPageNavi] = useState("board-project");
+  const { projectId } = useParams();
+  console.log(projectId);
+  const projectName = projectId ? projectId : "";
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const [pageNavi, setPageNavi] = useState(
+    localStorage.getItem("pageNavi")
+      ? JSON.parse(localStorage.getItem("pageNavi"))
+      : "Introduction"
+  );
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -29,88 +41,162 @@ const Home = () => {
       label,
     };
   }
+
   const items = [
-    getItem("Option 1", "1", <PieChartOutlined />),
-    getItem("Option 2", "2", <DesktopOutlined />),
-    getItem("User", "sub1", <UserOutlined />, [
-      getItem("Tom", "3"),
-      getItem("Bill", "4"),
-      getItem("Alex", "5"),
+    getItem("Introduction", "landing-page", <PieChartOutlined />),
+    getItem("Management", "sub1", <LineChartOutlined />, [
+      getItem("User Management", "user-manage", <UsergroupAddOutlined />),
+      getItem("Project Management", "project-manage", <DesktopOutlined />),
+      getItem(
+        "Detail Project",
+        projectId ? `project-detail/${projectId}` : "project-detail",
+        <ProjectOutlined />,
+        null,
+        { disabled: !projectId } // Vô hiệu hóa nếu không có projectId
+      ),
     ]),
-    getItem("Manage", "sub2", <UnorderedListOutlined />, [
-      getItem("Board Project", "board-project", <ProjectOutlined />),
+    getItem("Project", "sub2", <UnorderedListOutlined />, [
       getItem("Create Project", "create-project", <PlusCircleOutlined />),
     ]),
-    getItem("Files", "9", <FileOutlined />),
+    getItem("My Profile", "profile", <ProfileOutlined />),
   ];
 
+  // update when click button
+  const updateBreadcrumb = (key) => {
+    if (key.startsWith("project-detail")) {
+      return ["Management", "Project Management", projectId ? projectId : ""];
+    }
+    return breadcrumbMap[key] || [];
+  };
+
+  /// all key
+  const breadcrumbMap = {
+    "landing-page": ["Introduction"],
+    "create-project": ["Project", "Create Project"],
+    "user-manage": ["Management", "User Management"],
+    "project-manage": ["Management", "Project Management"],
+    "project-detail": ["Management", "Project Management", "Haha"],
+  };
+
+  const location = useLocation();
+  const [selectedKeys, setSelectedKeys] = useState([]);
+
+  // navigate to Detail Project when projectId change
+  useEffect(() => {
+    const paths = location.pathname.split("/");
+    const activeKey =
+      paths[2] === "project-detail" ? `project-detail/${projectId}` : paths[2];
+    setSelectedKeys([activeKey]);
+
+    const updatedBreadcrumb = updateBreadcrumb(activeKey);
+    setPageNavi(updatedBreadcrumb);
+    saveLocalStore("pageNavi", updatedBreadcrumb);
+  }, [location, projectId]);
+
+  // when path change
+  useEffect(() => {
+    const key = getKeyFromPath();
+    const updatedBreadcrumb = updateBreadcrumb(key);
+    setPageNavi(updatedBreadcrumb);
+    saveLocalStore("pageNavi", updatedBreadcrumb);
+  }, [location, projectId]);
+
+  // reload page
+  const savedPageNavi = localStorage.getItem("pageNavi")
+    ? JSON.parse(localStorage.getItem("pageNavi"))
+    : ["Introduction"];
+
+  // determine key pageNavi
+  const getKeyFromPath = () => {
+    if (location.pathname.includes("project-detail") && projectId) {
+      return `project-detail/${projectId}`;
+    }
+    // Thêm logic cho các đường dẫn khác nếu cần
+    return location.pathname.split("/")[2] || "landing-page";
+  };
+  const defaultSelectedKey = Array.isArray(pageNavi)
+    ? pageNavi[pageNavi.length - 1]
+    : pageNavi;
+
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-      }}
-    >
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
+    <>
+      {contextHolder}
+      <Layout
+        style={{
+          minHeight: "100vh",
+        }}
       >
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-          // navigate
-          onSelect={({ item, key, keyPath, selectedKeys, domEvent }) => {
-            // console.log(key);
-            // console.log(item);
-            // console.log(keyPath);
-            // console.log(selectedKeys);
-            // console.log(domEvent);
-            setPageNavi(key);
-            navigate(`/manage-project/${key}`);
-          }}
-        />
-      </Sider>
-      <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
-        <Content
-          style={{
-            margin: "0 16px",
-          }}
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
         >
-          <Breadcrumb
+          <div className="demo-logo-vertical" />
+          <Menu
+            theme="dark"
+            selectedKeys={selectedKeys}
+            defaultSelectedKeys={[defaultSelectedKey]}
+            mode="inline"
+            items={items}
+            // navigate
+            onSelect={({ item, key, keyPath, selectedKeys, domEvent }) => {
+              if (key === "project-detail" && !projectId) {
+                messageApi.warning(
+                  "You must enter Project Manager and choose the project to see this field."
+                );
+                return;
+              }
+              const updatedBreadcrumb = updateBreadcrumb(key);
+              setPageNavi(updatedBreadcrumb);
+              saveLocalStore("pageNavi", updatedBreadcrumb);
+
+              if (key.startsWith("project-detail")) {
+                navigate(`/manage-project/project-detail/${projectId}`);
+              } else {
+                navigate(`/manage-project/${key}`);
+              }
+            }}
+          />
+        </Sider>
+        <Layout>
+          <Header
             style={{
-              margin: "16px 0",
+              padding: 0,
+              background: colorBgContainer,
+            }}
+          />
+          <Content
+            style={{
+              margin: "0 16px",
             }}
           >
-            <Breadcrumb.Item>Manage</Breadcrumb.Item>
-            <Breadcrumb.Item>
-              {pageNavi === "board-project"
-                ? "Board"
-                : pageNavi === "create-project"
-                ? "Create"
-                : ""}
-            </Breadcrumb.Item>
-          </Breadcrumb>
-          {/* This is place which help navigation */}
-          <Outlet />
-        </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Ant Design ©2023 Created by Ant UED
-        </Footer>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+              {/* check pageNavi array or not */}
+              {Array.isArray(pageNavi) ? (
+                pageNavi.map((navItem, index) => (
+                  <Breadcrumb.Item key={index}>{navItem}</Breadcrumb.Item>
+                ))
+              ) : (
+                <Breadcrumb.Item>{pageNavi}</Breadcrumb.Item>
+              )}
+            </Breadcrumb>
+            {/* This is place which help navigation */}
+            <Outlet />
+          </Content>
+          <Footer
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Ant Design ©2023 Created by Wris TrieAurora
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   );
 };
 

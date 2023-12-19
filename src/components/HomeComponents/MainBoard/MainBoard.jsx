@@ -7,7 +7,7 @@ const MainBoard = () => {
       className="main space-y-3 rounded-3xl"
       style={{ backgroundImage: `url(${Background})` }}
     >
-      <div className="text-2xl font-bold text-white py-5">Cyber Board</div>
+      <div className="text-2xl font-bold text-white pt-5 pb-3">Cyber Board</div>
       <div className="info flex items-center">
         <div className="search-block">
           <input className="search" />

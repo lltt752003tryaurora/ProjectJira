@@ -231,12 +231,13 @@ const SettingOffCanvas = () => {
               <Link
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 onClick={() => {
-                  saveLocalStore(TOKEN, "");
-                  saveLocalStore(USER_LOGIN, "");
-                  setTimeout(() => {
-                    navigate("/");
-                    window.location.reload(true);
-                  }, 2000);
+                  localStorage.removeItem(TOKEN);
+                  localStorage.removeItem(USER_LOGIN);
+                  window.location.reload();
+                  // setTimeout(() => {
+                  //   navigate("/");
+                  //   window.location.reload(true);
+                  // }, 2000);
                 }}
               >
                 <svg

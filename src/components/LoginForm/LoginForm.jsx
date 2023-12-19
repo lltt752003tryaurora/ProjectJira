@@ -26,7 +26,7 @@ const LoginForm = () => {
           saveLocalStore(TOKEN, res.data.content.accessToken);
           messageApi.success("Login successed");
           setTimeout(() => {
-            navigate("/");
+            navigate("/manage-project");
             window.location.reload(true);
           }, 2000);
         })
