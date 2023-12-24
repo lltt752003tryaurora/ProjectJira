@@ -245,7 +245,7 @@ const ProjectManagement = () => {
               return (
                 <Avatar
                   alt={member.name}
-                  src={<img src={member.avatar} title={member.name} />}
+                  src={<img src={member.avatar} title={member.name} alt=""/>}
                 />
               );
             })}

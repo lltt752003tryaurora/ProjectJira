@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setDataUser } from "../../redux/userSlice";
 import SettingOffCanvas from "../../page/User/SettingOffCanvas/SettingOffCanvas";
+import Logo from "./Logo";
 
-const Header = () => {
+const Header = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
 
@@ -15,21 +16,11 @@ const Header = () => {
     }
   }, []);
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
+    <header className={"sticky top-0 left-0 w-full z-50 " + props.className}>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           {/* eslint-disable-next-line */}
-          <a
-            href="https://www.facebook.com/truongthinh752003"
-            className="flex items-center no-underline"
-            target="_blank"
-          >
-            <i className="fa-solid fa-diagram-project text-white"></i>
-            <span> </span>
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Jira TryAurora
-            </span>
-          </a>
+          <Logo/>
           <div className="flex items-center lg:order-2">
             {!user ? (
               <>

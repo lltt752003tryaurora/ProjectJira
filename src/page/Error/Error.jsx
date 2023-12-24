@@ -29,10 +29,12 @@ const Error = () => {
       <img
         src="https://assets.codepen.io/1538474/astronaut.svg"
         className="astronaut"
+        alt=""
       />
       <img
         src="https://assets.codepen.io/1538474/spaceship.svg"
         className="spaceship"
+        alt=""
       />
     </div>
   );

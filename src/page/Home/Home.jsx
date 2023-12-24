@@ -130,6 +130,7 @@ const Home = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
+		  className=""
         >
           <div className="demo-logo-vertical" />
           <Menu

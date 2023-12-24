@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+	height: 100%;
+}
+
 .jira {
   height: 100vh;
   font-family: "Roboto", sans-serif;
