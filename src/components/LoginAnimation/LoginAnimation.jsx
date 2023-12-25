@@ -1,11 +1,11 @@
 import React from "react";
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 
 // import animation vào component
 import * as loginAnimation from "../../asset/Animation/loginAnimation.json";
 
 const LoginAnimation = () => {
-  const defaultOptions = {
+	const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: loginAnimation,
@@ -16,6 +16,9 @@ const LoginAnimation = () => {
 
   return (
     <Lottie
+	    loop={true}
+      autoplay={true}
+    	animationData={loginAnimation}
       options={defaultOptions}
       height={400}
       width={400}

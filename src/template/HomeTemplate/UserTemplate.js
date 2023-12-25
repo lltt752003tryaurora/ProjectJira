@@ -7,7 +7,7 @@ const UserTemplate = () => {
   return (
     <div>
       <Header />
-      <div className="mt-[48px]">
+      <div className="">
         <ProjectDrawerEdit />
         <Outlet />
       </div>

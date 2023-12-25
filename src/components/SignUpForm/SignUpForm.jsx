@@ -245,7 +245,7 @@ const SignUpForm = () => {
                           <a
                             className="font-medium text-primary-600 hover:underline dark:text-primary-500 hover:text-blue-500"
                             href="https://www.facebook.com/truongthinh752003"
-                            target="_blank"
+                            target="_blank" rel="noreferrer"
                           >
                             Terms and Conditions
                           </a>

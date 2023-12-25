@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/manage-project/landing-page" />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/" element={<UserTemplate />}>
           <Route path="manage-project" element={<Home />}>
             <Route path="landing-page" element={<LandingPage />} />

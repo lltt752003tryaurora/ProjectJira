@@ -79,6 +79,7 @@ const TableAddProject = ({ members, record }) => {
             src={item.avatar}
             title={item.name}
             className="w-10 h-10 rounded-full"
+			alt=""
           />
         ),
       })) || [];

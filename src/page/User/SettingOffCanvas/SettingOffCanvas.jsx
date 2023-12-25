@@ -75,7 +75,7 @@ const SettingOffCanvas = () => {
           <ul className="space-y-2 font-medium">
             <li>
               <a
-                href="#"
+                href="#Dashboard"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -129,7 +129,7 @@ const SettingOffCanvas = () => {
               <ul id="dropdown-example" className="hidden py-2 space-y-2">
                 <li>
                   <a
-                    href="#"
+                    href="#Products"
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Products
@@ -137,7 +137,7 @@ const SettingOffCanvas = () => {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="#Billing"
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Billing
@@ -145,7 +145,7 @@ const SettingOffCanvas = () => {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="#Invoice"
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Invoice
@@ -155,7 +155,7 @@ const SettingOffCanvas = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="#Kanban"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -175,7 +175,7 @@ const SettingOffCanvas = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="#Inbox"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -195,7 +195,7 @@ const SettingOffCanvas = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="#Users"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -212,7 +212,7 @@ const SettingOffCanvas = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="#Products"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg

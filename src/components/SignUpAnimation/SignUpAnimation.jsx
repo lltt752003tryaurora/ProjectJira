@@ -1,4 +1,4 @@
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 
 // import animation vào component
 import * as signupAnimation from "./../../asset/Animation/signupAnimation.json";
@@ -15,6 +15,9 @@ const SignUpAnimation = () => {
 
   return (
     <Lottie
+	  loop={true}
+      autoplay={true}
+	  animationData= {signupAnimation}
       options={defaultOptions}
       height={400}
       width={400}
