@@ -11,6 +11,9 @@
 # production
 /build
 
+# setting API
+/settingSystem
+
 # misc
 .DS_Store
 .env.local

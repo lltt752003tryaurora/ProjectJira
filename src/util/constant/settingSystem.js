@@ -10,6 +10,7 @@ export const API_KEY_TINY = "80kjrawez62oz9tf55pg9dn5gcvm0m0lcacj5o8zx71l1dl1";
 
 // BASE-API
 export const URL_DOMAIN = "https://jiranew.cybersoft.edu.vn";
+
 // ENDPOINT-API
 
 // API Manage about project
