@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\Footer",
+    "\\src\\page",
+    "\\src\\page\\Error",
+    "\\src\\page\\Home",
+    "\\src\\page\\Home\\Project",
+    "\\src\\redux",
+    "\\src\\service",
+    "\\src\\template"
+  ],
+  "SelectedNode": "\\src\\page\\Home\\Project\\CreateProject.jsx",
+  "PreviewInSolutionExplorer": false
+}
