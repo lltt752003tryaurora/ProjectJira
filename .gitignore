@@ -12,7 +12,7 @@
 /build
 
 # setting API
-/settingSystem
+/util/settingSystem.js
 
 # misc
 .DS_Store
