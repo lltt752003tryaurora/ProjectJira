@@ -12,7 +12,7 @@
 /build
 
 # setting API
-/util/constant
+# /util/constant
 
 # misc
 .DS_Store
